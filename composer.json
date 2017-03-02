@@ -1,0 +1,23 @@
+{
+    "name": "telota/rasmify",
+    "description": "Reduce Arabic strings to their rasm, i.e. remove vocalization and other diacritics",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Pohl",
+            "email": "opohl@bbaw.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpspec/phpspec": "^3.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {"Telota\\": "src/Telota"}
+    }
+}
