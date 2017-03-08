@@ -22,10 +22,15 @@ class RasmifySpec extends ObjectBehavior
         );
 
         $quranVerse1WithoutRasm = array(
-            "الڡاٮحه", "ٮسم", "الل‍ه", "الرحمں", "الرحٮم‎", "الحمد", "لله", "رٮ", "العلمٮں‎", "الرحمں", "الرحٮم‎",
-            "ملک", "ٮوم", "الدٮں‎", "اٮاك", "ٮعٮد", "واٮاك", "ٮسٮعٮں‎", "اهدٮا", "الصرط", "المسٮڡٮم‎", "صرط", "الدٮں",
+            "الڡاٮحه", "ٮسم", "الله", "الرحمں", "الرحٮم", "الحمد", "لله", "رٮ", "العلمٮں", "الرحمں", "الرحٮم",
+            "ملک", "ٮوم", "الدٮں", "اٮاک", "ٮعٮد", "واٮاک", "ٮسٮعٮں‎", "اهدٮا", "الصرط", "المسٮڡٮم‎", "صرط", "الدٮں",
             "اٮعمٮ", "علٮهم", "عٮر", "المعصوٮ", "علٮهم", "ولا", "الصالٮں‎",
         );
+
+        foreach($quranVerse1WithoutRasm as $index => $word)
+        {
+            $quranVerse1WithoutRasm[$index] = transliterator_transliterate('[\u200e] remove', $word);
+        }
 
         $testArray = array_combine($quranVerse1WithRasm, $quranVerse1WithoutRasm);
 
@@ -34,8 +39,10 @@ class RasmifySpec extends ObjectBehavior
         foreach ($testArray as $withRasm => $withoutRasm)
         {
             $counter++;
+            echo "Index: " . $counter ." --- " . $withRasm . " --- " . $withoutRasm . " --- " . substr($withoutRasm, 0, 1) ." \n\n";
             $this->rasmify($withRasm)->shouldReturn($withoutRasm);
         }
+        // $this->rasmify("مَٰلِكِ")->shouldReturn("ملک");
 
 
     }
