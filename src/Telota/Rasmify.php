@@ -30,11 +30,21 @@ class Rasmify
         $rasmString = str_replace("عٰ", "ع", $rasmString);
         $rasmString = str_replace("ك", "ک", $rasmString);
         $rasmString = str_replace("إ", "ا", $rasmString);
+        $rasmString = str_replace("ق", "ٯ", $rasmString);
+        $rasmString = str_replace("ذ", "د", $rasmString);
+        $rasmString = str_replace("أ", "ا", $rasmString);
+        $rasmString = str_replace("غ", "ع", $rasmString);
+        $rasmString = str_replace("ض", "ص", $rasmString);
+        $rasmString = str_replace("آ", "ا", $rasmString);
 
 
-        // TODO Only apply if last letter
-        $rasmString = str_replace("ن", "ں", $rasmString);
+        if (mb_substr($rasmString, -1, 1) == "ن")
+        {
 
+            $rasmString = mb_substr($rasmString, 0, mb_strlen($rasmString)-1) . "ں";
+        }
+
+        $rasmString = str_replace("ن", "ٮ", $rasmString);
 
 
         return $rasmString;
