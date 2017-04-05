@@ -13,37 +13,28 @@ class RasmifySpec extends ObjectBehavior
         $this->shouldHaveType(Rasmify::class);
     }
 
-    function it_reduces_arabic_text_to_rasm()
+
+    function it_checks_the_rasm_for_every_word_in_the_quran()
     {
 
-        $quranVerse1WithRasm = array("الفَاتِحَة", "بِسۡمِ", "ٱللَّهِ", "ٱلرَّحۡمَٰنِ", "ٱلرَّحِيمِ", "ٱلۡحَمۡدُ", "لِلَّهِ", "رَبِّ", "ٱلۡعَٰلَمِينَ",
-            "ٱلرَّحۡمَٰنِ", "ٱلرَّحِيمِ", "مَٰلِكِ", "يَوۡمِ", "ٱلدِّينِ", "إِيَّاكَ", "نَعۡبُدُ", "وَإِيَّاكَ", "نَسۡتَعِينُ", "ٱهۡدِنَا", "ٱلصِّرَٰطَ",
-            "ٱلۡمُسۡتَقِيمَ", "صِرَٰطَ", "ٱلَّذِينَ", "أَنۡعَمۡتَ", "عَلَيۡهِمۡ", "غَيۡرِ", "ٱلۡمَغۡضُوبِ", "عَلَيۡهِمۡ", "وَلَا", "ٱلضَّآلِّينَ"
-        );
+        $inputFile = file_get_contents(getcwd() . "/data/quran_text_rasm.csv");
 
-        $quranVerse1WithoutRasm = array(
-            "الڡاٮحه", "ٮسم", "الله", "الرحمں", "الرحٮم", "الحمد", "لله", "رٮ", "العلمٮں", "الرحمں", "الرحٮم",
-            "ملک", "ٮوم", "الدٮں", "اٮاک", "ٮعٮد", "واٮاک", "ٮسٮعٮں‎", "اهدٮا", "الصرط", "المسٮٯٮم", "صرط", "الدٮں",
-            "اٮعمٮ", "علٮهم", "عٮر", "المعصوٮ", "علٮهم", "ولا", "الصالٮں‎",
-        );
+        $lines = explode("\n", $inputFile);
 
-        foreach($quranVerse1WithoutRasm as $index => $word)
+        foreach($lines as $line)
         {
-            $quranVerse1WithoutRasm[$index] = transliterator_transliterate('[\u200e] remove', $word);
+
+            $wordData = explode("\t", $line);
+
+            if (sizeof($wordData) < 6) { continue; }
+
+            $arab = $wordData[4];
+            $rasm = $wordData[5];
+
+            $this->rasmify($arab)->shouldReturn($rasm);
+
         }
-
-        $testArray = array_combine($quranVerse1WithRasm, $quranVerse1WithoutRasm);
-
-        $counter = 0;
-
-        foreach ($testArray as $withRasm => $withoutRasm)
-        {
-            $counter++;
-            echo "Index: " . $counter ." --- " . $withRasm . " --- " . $withoutRasm . " --- " . substr($withoutRasm, 0, 1) ." \n\n";
-            $this->rasmify($withRasm)->shouldReturn($withoutRasm);
-        }
-        // $this->rasmify("مَٰلِكِ")->shouldReturn("ملک");
-
 
     }
+
 }
