@@ -2,7 +2,7 @@
     "name": "telota/rasmify",
     "description": "Reduce Arabic strings to their rasm, i.e. remove vocalization and other diacritics",
     "type": "library",
-    "license": "MIT",
+    "license": "LGPL-3.0",
     "authors": [
         {
             "name": "Oliver Pohl",
