@@ -1,6 +1,4 @@
-# Rasmify
-
-## Description
+# Description
 
 Reduce arabic text to its rasm, i.e. remove vocalization marks, diacritics so you only are left with a *basic consonant skeleton*.
 
@@ -13,3 +11,19 @@ Compare the following examples:
 
 **Text without diacritics (rasmified)**
 ![First sura of the Qur'an rasmified](assets/quranic_text_rasmified.png)
+
+# Installation
+
+Require this package using Composer. Run the following command in the terminal:
+
+```composer require "telota/rasmify":"0.1.*"```
+
+# Usage
+
+To convert an arabic string to its *rasm*, use the following code:
+
+```
+use Telota\Rasmify;
+
+$rasmified = Rasmify::rasmify($arabicString);
+```
