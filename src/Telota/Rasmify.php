@@ -89,8 +89,8 @@ class Rasmify
         // Replace arabic letter waw with hamza above (\u0624) with arabic letter waw (\u0648)
         $rasmString = str_replace("ؤ", "و", $rasmString);
 
-        // Replace arabic letter yeh with hamza above (\u0626) with arabic letter dotless beh (\u066E)
-        $rasmString = str_replace("ئ", "ٮ", $rasmString);
+        // Replace arabic letter yeh with hamza above (\u0626) with arabic Arabic Letter Alef Maksura (\u0649)
+        $rasmString = str_replace("ئ", "ى", $rasmString);
 
         // Replace arabic letter noon (\u0646) with arabic letter noon ghunna (\u06BA)
         $rasmString = str_replace("ن", "ں", $rasmString);
